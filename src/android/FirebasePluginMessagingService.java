@@ -33,10 +33,14 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 import java.util.Random;
+
+import io.smooch.core.Smooch;
+import io.smooch.core.FcmService;
 
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
@@ -59,6 +63,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
             super.onNewToken(refreshedToken);
             Log.d(TAG, "Refreshed token: " + refreshedToken);
             FirebasePlugin.sendToken(refreshedToken);
+            Smooch.setFirebaseCloudMessagingToken(refreshedToken);
         }catch (Exception e){
             FirebasePlugin.handleExceptionWithoutContext(e);
         }
@@ -138,6 +143,12 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
             boolean foregroundNotification = false;
 
             Map<String, String> data = remoteMessage.getData();
+
+            // handling notification from Smooch
+            if("true".equals(data.get("smoochNotification"))){
+                FcmService.triggerSmoochNotification(data, this.getApplicationContext());
+                return;
+            }
 
             if (remoteMessage.getNotification() != null) {
                 // Notification message payload
