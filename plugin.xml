@@ -156,7 +156,7 @@
 				<pod name="Firebase/Performance" spec="10.16.0"/>
 				<pod name="Firebase/RemoteConfig" spec="10.16.0"/>
 				<pod name="Firebase/InAppMessaging" spec="10.16.0"/>
-				<pod name="FirebaseFirestore" git="https://github.com/Parag-Tharani/firestore-ios-sdk-frameworks.git" tag="10.16.0"/>
+				<!-- <pod name="FirebaseFirestore" git="https://github.com/Parag-Tharani/firestore-ios-sdk-frameworks.git" tag="10.16.0"/> -->
 				<pod name="Firebase/Crashlytics" spec="10.16.0"/>
 				<pod name="Firebase/Functions" spec="10.16.0"/>
 				<pod name="Firebase/Installations" spec="10.16.0"/>
